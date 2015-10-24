@@ -1,0 +1,45 @@
+#!/bin/bash
+filecpp=$1
+filetxt=$2
+filext=$3
+code=$4
+echo $code
+g++ $filecpp -o $filext
+if [ $? -ne 0 ]
+then
+	echo "Compilation Error"
+else
+	./$filext > $filetxt
+	if [ $? -ne 0 ]
+	then
+		echo "Runtime Error"
+	else
+		if [ $code=='1' ]
+		then		
+			diff $filetxt $filetxt
+			if [ $? -ne 0 ]
+			then
+				echo "Output Not Match error_1"
+			else
+				echo "Correct Answer_1"
+			fi
+		elif [ $code=='2' ]
+		then
+			diff $filetxt $filetxt
+			if [ $? -ne 0 ]
+			then
+				echo "Output Not Match error_2"
+			else
+				echo "Correct Answer_2"
+			fi
+		else
+			diff $filetxt $filetxt
+			if [ $? -ne 0 ]
+			then
+				echo "Output Not Match error_3"
+			else
+				echo "Correct Answer_3"
+			fi
+		fi
+	fi
+fi
